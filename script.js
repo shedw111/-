@@ -75,7 +75,7 @@ function displayCards(hand, mushteraCard) {
 
     const passButton = document.createElement('button');
     passButton.className = 'game-button';
-    passButton.textContent = 'تعدية';
+    passButton.textContent = 'بس';
     choicesDiv.appendChild(passButton);
     
     gameContainer.appendChild(choicesDiv);
@@ -85,7 +85,7 @@ function displayCards(hand, mushteraCard) {
         console.log('لقد اخترت الشراء!');
     });
     passButton.addEventListener('click', () => {
-        console.log('لقد اخترت التعدية!');
+        console.log('لقد اخترت بس!');
     });
 }
 
