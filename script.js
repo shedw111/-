@@ -10,6 +10,7 @@ function createAndShuffleDeck() {
         }
     }
 
+    // Shuffle the deck using the Fisher-Yates algorithm
     for (let i = deck.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [deck[i], deck[j]] = [deck[j], deck[i]];
@@ -37,11 +38,21 @@ function dealCards(deck) {
     };
 }
 
-// Function to display the cards on the screen
+// Function to display the cards and choices on the screen
 function displayCards(hand, mushteraCard) {
     const gameContainer = document.getElementById('game-container');
     gameContainer.innerHTML = ''; // Clear previous content
 
+    // Display the mushtera card first
+    const mushteraDiv = document.createElement('div');
+    mushteraDiv.className = 'mushtera-display';
+    mushteraDiv.innerHTML = '<h3>ورقة المشترى:</h3>';
+    const mushteraCardDiv = document.createElement('div');
+    mushteraCardDiv.className = `card-display ${mushteraCard.suit === '♥️' || mushteraCard.suit === '♦️' ? 'red' : ''}`;
+    mushteraCardDiv.textContent = `${mushteraCard.rank}${mushteraCard.suit}`;
+    mushteraDiv.appendChild(mushteraCardDiv);
+    gameContainer.appendChild(mushteraDiv);
+    
     // Display the player's hand
     const playerHandDiv = document.createElement('div');
     playerHandDiv.className = 'player-hand';
@@ -53,16 +64,6 @@ function displayCards(hand, mushteraCard) {
         playerHandDiv.appendChild(cardDiv);
     });
     gameContainer.appendChild(playerHandDiv);
-
-    // Display the mushtera card
-    const mushteraDiv = document.createElement('div');
-    mushteraDiv.className = 'mushtera-display';
-    mushteraDiv.innerHTML = '<h3>ورقة المشترى:</h3>';
-    const mushteraCardDiv = document.createElement('div');
-    mushteraCardDiv.className = `card-display ${mushteraCard.suit === '♥️' || mushteraCard.suit === '♦️' ? 'red' : ''}`;
-    mushteraCardDiv.textContent = `${mushteraCard.rank}${mushteraCard.suit}`;
-    mushteraDiv.appendChild(mushteraCardDiv);
-    gameContainer.appendChild(mushteraDiv);
     
     // Display the player's choices
     const choicesDiv = document.createElement('div');
@@ -75,17 +76,17 @@ function displayCards(hand, mushteraCard) {
 
     const passButton = document.createElement('button');
     passButton.className = 'game-button';
-    passButton.textContent = 'بس';
+    passButton.textContent = 'تعدية';
     choicesDiv.appendChild(passButton);
     
     gameContainer.appendChild(choicesDiv);
 
     // Add event listeners (we will add the actual logic later)
     buyButton.addEventListener('click', () => {
-        console.log('لقد اخترت الشراء!');
+        alert('لقد اخترت الشراء!');
     });
     passButton.addEventListener('click', () => {
-        console.log('لقد اخترت بس!');
+        alert('لقد اخترت التعدية!');
     });
 }
 
